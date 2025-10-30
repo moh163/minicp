@@ -48,6 +48,10 @@ public class BoolVarIsEqual extends IntVarImpl implements BoolVar {
                 }
             });
 
+            x.whenNotZero(()->{
+                if(v==0) this.fix(false);
+            });
+
         }
 
     }

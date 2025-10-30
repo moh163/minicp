@@ -53,6 +53,27 @@ public interface IntVar {
     void whenDomainChange(Procedure f);
 
     /**
+     * Asks that the closure is called whenever 0 is removed from the domain
+     * of this variable.
+     * @param c the closure
+     */
+    void whenNotZero(Procedure c);
+
+    /**
+     * Asks that the closure is called whenever the minimum
+     * of the domain of this variable changes.
+     * @param f the closure
+     */
+    void whenMinChange(Procedure f);
+
+    /**
+     * Asks that the closure is called whenever the maximum
+     * of the domain of this variable changes.
+     * @param f the closure
+     */
+    void whenMaxChange(Procedure f);
+
+    /**
      * Asks that {@link Constraint#propagate()} is called whenever the domain
      * of this variable changes.
      * We say that a <i>change</i> event occurs.
@@ -91,6 +112,25 @@ public interface IntVar {
      *           method should be called when 0 is removed from the domain of this variable.
      */
     void propagateOnNotZero(Constraint c);
+
+    /**
+     * Asks that {@link Constraint#propagate()} is called whenever the
+     * minimum of the domain of this variable changes.
+     * 
+     * @param c  the constraint for which the {@link Constraint#propagate()}
+     * 
+     */
+    void propagateOnMinChange(Constraint c);
+
+
+    /**
+     * Asks that {@link Constraint#propagate()} is called whenever the
+     * maximum of the domain of this variable changes.
+     * 
+     * @param c  the constraint for which the {@link Constraint#propagate()}
+     *          method should be called when the maximum of the domain of this variable changes.
+     */
+    void propagateOnMaxChange(Constraint c);
 
 
     /**

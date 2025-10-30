@@ -23,6 +23,7 @@ public class BoolVarImpl implements BoolVar {
 
     /**
      * Create a boolean variable view from the binary variable
+     * 
      * @param binaryVar
      */
     public BoolVarImpl(IntVar binaryVar) {
@@ -72,6 +73,21 @@ public class BoolVarImpl implements BoolVar {
     }
 
     @Override
+    public void whenNotZero(Procedure c) {
+        binaryVar.whenNotZero(c);
+    }
+
+    @Override
+    public void whenMinChange(Procedure f) {
+        binaryVar.whenMinChange(f);
+    }
+
+    @Override
+    public void whenMaxChange(Procedure f) {
+        binaryVar.whenMaxChange(f);
+    }
+
+    @Override
     public void propagateOnDomainChange(Constraint c) {
         binaryVar.propagateOnDomainChange(c);
     }
@@ -84,6 +100,21 @@ public class BoolVarImpl implements BoolVar {
     @Override
     public void propagateOnBoundChange(Constraint c) {
         binaryVar.propagateOnBoundChange(c);
+    }
+
+    @Override
+    public void propagateOnNotZero(Constraint c) {
+        binaryVar.propagateOnNotZero(c);
+    }
+
+    @Override
+    public void propagateOnMinChange(Constraint c) {
+        binaryVar.propagateOnMinChange(c);
+    }
+
+    @Override
+    public void propagateOnMaxChange(Constraint c) {
+        binaryVar.propagateOnMaxChange(c);
     }
 
     @Override
@@ -138,8 +169,11 @@ public class BoolVarImpl implements BoolVar {
 
     @Override
     public String toString() {
-        if (isTrue()) return "true";
-        else if (isFalse()) return "false";
-        else return "{false,true}";
+        if (isTrue())
+            return "true";
+        else if (isFalse())
+            return "false";
+        else
+            return "{false,true}";
     }
 }

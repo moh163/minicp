@@ -66,6 +66,7 @@ public class IsLessOrEqual extends AbstractConstraint { // b <=> x <= v
                     x.removeBelow(v + 1);
                 }
             });
+            //on pourrais separer cela en deux avec whenminchange et whenmaxchange
             x.whenBoundChange(() -> {
                 if (x.max() <= v) {
                     // should deactivate the constraint as it is entailed

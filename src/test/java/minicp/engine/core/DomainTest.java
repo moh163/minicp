@@ -54,6 +54,12 @@ public class DomainTest extends SolverTest {
         public void changeMax() {
             nRemoveAbove++;
         }
+
+       
+        @Override
+        public void noZeroAnymore() {
+            
+        }
     }
 
     @ParameterizedTest

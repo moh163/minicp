@@ -13,7 +13,6 @@
  * Copyright (c)  2018. by Laurent Michel, Pierre Schaus, Pascal Van Hentenryck
  */
 
-
 package minicp.engine.core;
 
 import minicp.util.Procedure;
@@ -29,9 +28,11 @@ public class IntVarViewOffset implements IntVar {
 
     public IntVarViewOffset(IntVar x, int offset) { // y = x + o
         if (0L + x.min() + offset <= (long) Integer.MIN_VALUE)
-            throw new IntOverFlowException("consider applying a smaller offset as the min domain on this view is <= Integer.MIN _VALUE");
+            throw new IntOverFlowException(
+                    "consider applying a smaller offset as the min domain on this view is <= Integer.MIN _VALUE");
         if (0L + x.max() + offset >= (long) Integer.MAX_VALUE)
-            throw new IntOverFlowException("consider applying a smaller offset as the max domain on this view is >= Integer.MAX _VALUE");
+            throw new IntOverFlowException(
+                    "consider applying a smaller offset as the max domain on this view is >= Integer.MAX _VALUE");
         this.x = x;
         this.o = offset;
 
@@ -58,6 +59,21 @@ public class IntVarViewOffset implements IntVar {
     }
 
     @Override
+    public void whenNotZero(Procedure c) {
+        x.whenNotZero(c);
+    }
+
+     @Override
+    public void whenMinChange(Procedure f) {
+        x.whenMinChange(f);
+    }
+
+    @Override
+    public void whenMaxChange(Procedure f) {
+        x.whenMaxChange(f);
+    }
+
+    @Override
     public void propagateOnDomainChange(Constraint c) {
         x.propagateOnDomainChange(c);
     }
@@ -70,6 +86,21 @@ public class IntVarViewOffset implements IntVar {
     @Override
     public void propagateOnBoundChange(Constraint c) {
         x.propagateOnBoundChange(c);
+    }
+
+    @Override 
+    public void propagateOnNotZero(Constraint c) {
+        x.propagateOnNotZero(c);
+    }
+
+    @Override
+    public void propagateOnMinChange(Constraint c){
+        x.propagateOnMinChange(c);
+    }
+
+    @Override
+    public void propagateOnMaxChange(Constraint c) {
+        x.propagateOnMaxChange(c);
     }
 
     @Override
@@ -136,7 +167,8 @@ public class IntVarViewOffset implements IntVar {
                 b.append(',');
             }
         }
-        if (size() > 0) b.append(max());
+        if (size() > 0)
+            b.append(max());
         b.append("}");
         return b.toString();
 

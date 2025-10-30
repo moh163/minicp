@@ -132,6 +132,7 @@ public class SparseSetDomain implements IntDomain {
                 default:
                     l.changeMax();
                     l.change();
+                    if (value<0) l.noZeroAnymore();
                     break;
             }
         }

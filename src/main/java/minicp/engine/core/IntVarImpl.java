@@ -35,6 +35,8 @@ public class IntVarImpl implements IntVar {
     private final StateStack<Constraint> onFix;
     private final StateStack<Constraint> onBound;
     private final StateStack<Constraint> onNotZero;
+    private final StateStack<Constraint> onMinChange;
+    private final StateStack<Constraint> onMaxChange;
 
     private final DomainListener domListener = new DomainListener() {
         @Override
@@ -54,11 +56,13 @@ public class IntVarImpl implements IntVar {
 
         @Override
         public void changeMin() {
+            scheduleAll(onMinChange);
             scheduleAll(onBound);
         }
 
         @Override
         public void changeMax() {
+            scheduleAll(onMaxChange);
             scheduleAll(onBound);
         }
 
@@ -96,6 +100,8 @@ public class IntVarImpl implements IntVar {
         onFix = new StateStack<>(cp.getStateManager());
         onBound = new StateStack<>(cp.getStateManager());
         onNotZero = new StateStack<>(cp.getStateManager());
+        onMinChange = new StateStack<>(cp.getStateManager());
+        onMaxChange = new StateStack<>(cp.getStateManager());
     }
 
 
@@ -140,6 +146,21 @@ public class IntVarImpl implements IntVar {
         onDomain.push(constraintClosure(f));
     }
 
+    @Override
+    public void whenNotZero(Procedure c) {
+        onNotZero.push(constraintClosure(c));
+    }
+
+    @Override
+    public void whenMinChange(Procedure f) {
+        onMinChange.push(constraintClosure(f));
+    }
+
+    @Override
+    public void whenMaxChange(Procedure f) {
+        onMaxChange.push(constraintClosure(f));
+    }
+
     private Constraint constraintClosure(Procedure f) {
         Constraint c = new ConstraintClosure(cp, f);
         getSolver().post(c, false);
@@ -166,6 +187,15 @@ public class IntVarImpl implements IntVar {
         onNotZero.push(c);
     }
 
+    @Override
+    public void propagateOnMinChange(Constraint c){
+        onMinChange.push(c);
+    }
+
+    @Override
+    public void propagateOnMaxChange(Constraint c){
+        onMaxChange.push(c);
+    }
 
     protected void scheduleAll(StateStack<Constraint> constraints) {
         for (int i = 0; i < constraints.size(); i++)

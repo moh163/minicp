@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: minicp.examples.VRPTest
+-------------------------------------------------------------------------------
+Tests run: 25, Failures: 0, Errors: 0, Skipped: 25, Time elapsed: 1.039 s - in minicp.examples.VRPTest

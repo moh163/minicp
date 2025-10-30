@@ -50,8 +50,28 @@ public class IntVarViewOpposite implements IntVar {
     }
 
     @Override
+    public void whenNotZero(Procedure c) {
+        x.whenNotZero(c);
+    }
+
+     @Override
+    public void whenMinChange(Procedure f) {
+        x.whenMinChange(f);
+    }
+
+    @Override
+    public void whenMaxChange(Procedure f) {
+        x.whenMaxChange(f);
+    }
+
+    @Override
     public void propagateOnDomainChange(Constraint c) {
         x.propagateOnDomainChange(c);
+    }
+
+    @Override
+    public void propagateOnNotZero(Constraint c) {
+        x.propagateOnNotZero(c);
     }
 
     @Override
@@ -62,6 +82,16 @@ public class IntVarViewOpposite implements IntVar {
     @Override
     public void propagateOnBoundChange(Constraint c) {
         x.propagateOnBoundChange(c);
+    }
+
+    @Override
+    public void propagateOnMinChange(Constraint c){
+        x.propagateOnMinChange(c);
+    }
+    
+    @Override
+    public void propagateOnMaxChange(Constraint c) {
+        x.propagateOnMaxChange(c);
     }
 
     @Override

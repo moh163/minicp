@@ -13,9 +13,7 @@
  * Copyright (c)  2018. by Laurent Michel, Pierre Schaus, Pascal Van Hentenryck
  */
 
-
 package minicp.engine.core;
-
 
 import minicp.util.Procedure;
 import minicp.util.exception.InconsistencyException;
@@ -31,9 +29,11 @@ public class IntVarViewMul implements IntVar {
 
     public IntVarViewMul(IntVar x, int a) {
         if ((1L + x.min()) * a <= (long) Integer.MIN_VALUE)
-            throw new IntOverFlowException("consider applying a smaller mul cte as the min domain on this view is <= Integer.MIN _VALUE");
+            throw new IntOverFlowException(
+                    "consider applying a smaller mul cte as the min domain on this view is <= Integer.MIN _VALUE");
         if ((1L + x.max()) * a >= (long) Integer.MAX_VALUE)
-            throw new IntOverFlowException("consider applying a smaller mul cte as the max domain on this view is >= Integer.MAX _VALUE");
+            throw new IntOverFlowException(
+                    "consider applying a smaller mul cte as the max domain on this view is >= Integer.MAX _VALUE");
         assert (a > 0);
         this.a = a;
         this.x = x;
@@ -60,6 +60,21 @@ public class IntVarViewMul implements IntVar {
     }
 
     @Override
+    public void whenNotZero(Procedure c) {
+        x.whenNotZero(c);
+    }
+
+    @Override
+    public void whenMinChange(Procedure f) {
+        x.whenMinChange(f);
+    }
+
+    @Override
+    public void whenMaxChange(Procedure f) {
+        x.whenMaxChange(f);
+    }
+
+    @Override
     public void propagateOnDomainChange(Constraint c) {
         x.propagateOnDomainChange(c);
     }
@@ -75,17 +90,34 @@ public class IntVarViewMul implements IntVar {
     }
 
     @Override
+    public void propagateOnNotZero(Constraint c) {
+        x.propagateOnNotZero(c);
+    }
+
+    @Override
+    public void propagateOnMinChange(Constraint c) {
+        x.propagateOnMinChange(c);
+    }
+
+    @Override
+    public void propagateOnMaxChange(Constraint c) {
+        x.propagateOnMaxChange(c);
+    }
+
+    @Override
     public int min() {
         if (a >= 0)
             return a * x.min();
-        else return a * x.max();
+        else
+            return a * x.max();
     }
 
     @Override
     public int max() {
         if (a >= 0)
             return a * x.max();
-        else return a * x.min();
+        else
+            return a * x.min();
     }
 
     @Override
@@ -138,7 +170,8 @@ public class IntVarViewMul implements IntVar {
         x.removeAbove(floorDiv(v, a));
     }
 
-    // Java's division always rounds to the integer closest to zero, but we need flooring/ceiling versions.
+    // Java's division always rounds to the integer closest to zero, but we need
+    // flooring/ceiling versions.
     private int floorDiv(int a, int b) {
         int q = a / b;
         return (a < 0 && q * b != a) ? q - 1 : q;
@@ -159,7 +192,8 @@ public class IntVarViewMul implements IntVar {
                 b.append(',');
             }
         }
-        if (size() > 0) b.append(max());
+        if (size() > 0)
+            b.append(max());
         b.append("}");
         return b.toString();
 
