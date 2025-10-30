@@ -66,12 +66,14 @@ public class SparseSetDomain implements IntDomain {
         if (domain.contains(v)) {
             boolean maxChanged = max() == v;
             boolean minChanged = min() == v;
+            boolean zeroRemoved = v==0;
             domain.remove(v);
             if (domain.size() == 0)
                 l.empty();
             l.change();
             if (maxChanged) l.changeMax();
             if (minChanged) l.changeMin();
+            if (zeroRemoved) l.noZeroAnymore();
             if (domain.size() == 1) l.fix();
         }
     }
@@ -82,6 +84,7 @@ public class SparseSetDomain implements IntDomain {
             if (domain.size() != 1) {
                 boolean maxChanged = max() != v;
                 boolean minChanged = min() != v;
+                boolean zeroRemoved = v !=0 && domain.contains(0);
                 domain.removeAllBut(v);
                 if (domain.size() == 0)
                     l.empty();
@@ -89,6 +92,7 @@ public class SparseSetDomain implements IntDomain {
                 l.change();
                 if (maxChanged) l.changeMax();
                 if (minChanged) l.changeMin();
+                if (zeroRemoved) l.noZeroAnymore();
             }
         } else {
             domain.removeAll();
@@ -109,6 +113,7 @@ public class SparseSetDomain implements IntDomain {
                 default:
                     l.changeMin();
                     l.change();
+                    if (value>0) l.notZeroAnymore();
                     break;
             }
         }

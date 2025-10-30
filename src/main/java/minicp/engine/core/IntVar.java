@@ -83,6 +83,15 @@ public interface IntVar {
      */
     void propagateOnBoundChange(Constraint c);
 
+    /**
+     * Asks that {@link Constraint#propagate()} is called whenever the
+     * domain of this variable cannot take the value 0 anymore.
+     * 
+     * @param c  the constraint for which the {@link Constraint#propagate()}
+     *           method should be called when 0 is removed from the domain of this variable.
+     */
+    void propagateOnNotZero(Constraint c);
+
 
     /**
      * Returns the minimum of the domain of the variable

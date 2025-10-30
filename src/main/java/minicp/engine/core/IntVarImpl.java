@@ -34,6 +34,7 @@ public class IntVarImpl implements IntVar {
     private final StateStack<Constraint> onDomain;
     private final StateStack<Constraint> onFix;
     private final StateStack<Constraint> onBound;
+    private final StateStack<Constraint> onNotZero;
 
     private final DomainListener domListener = new DomainListener() {
         @Override
@@ -59,6 +60,11 @@ public class IntVarImpl implements IntVar {
         @Override
         public void changeMax() {
             scheduleAll(onBound);
+        }
+
+        @Override
+        public void noZeroAnymore() {
+            scheduleAll(onNotZero);
         }
     };
 
@@ -89,6 +95,7 @@ public class IntVarImpl implements IntVar {
         onDomain = new StateStack<>(cp.getStateManager());
         onFix = new StateStack<>(cp.getStateManager());
         onBound = new StateStack<>(cp.getStateManager());
+        onNotZero = new StateStack<>(cp.getStateManager());
     }
 
 
@@ -152,6 +159,11 @@ public class IntVarImpl implements IntVar {
     @Override
     public void propagateOnBoundChange(Constraint c) {
         onBound.push(c);
+    }
+
+    @Override
+    public void propagateOnNotZero(Constraint c) {
+        onNotZero.push(c);
     }
 
 
