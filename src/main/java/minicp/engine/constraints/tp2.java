@@ -7,7 +7,7 @@ import minicp.util.exception.InconsistencyException;
 import minicp.util.exception.NotImplementedException;
 public class tp2 extends AbstractConstraint {
     private final IntVar[] y;
-    private final int x, z;
+    private final IntVar x, z;
 
      /**
      * Creates a constraint such
@@ -18,19 +18,16 @@ public class tp2 extends AbstractConstraint {
      * @param v the right member
      * @see 
      */
-    public tp2(int x, IntVar[] y, int v) { 
+    public tp2(IntVar x, IntVar[] y, IntVar z) { 
         super(y[0].getSolver());
         this.y = y;
         this.x = x;
-        this.z = v;
+        this.z = z;
        
     }
 
     @Override
     public void post() {
-         if (z < 0) {
-            throw new InconsistencyException();
-        }
     }
 
     @Override
