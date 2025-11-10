@@ -66,6 +66,7 @@ minicp\util\Procedure.class
 minicp\search\DFSearch$2.class
 minicp\state\Trail.class
 minicp\engine\constraints\AllDifferentFWC.class
+minicp\cp\SplitDomRange.class
 tinycsp\TinyCSP.class
 minicp\examples\DialARide$RideStop.class
 tinycsp\NotEqual.class
@@ -129,6 +130,7 @@ minicp\state\TrailInt.class
 minicp\search\StopSearchException.class
 minicp\engine\constraints\Absolute.class
 minicp\engine\constraints\Profile$1.class
+minicp\engine\constraints\tp2.class
 minicp\search\DFSListener.class
 minicp\engine\constraints\Profile$Rectangle.class
 minicp\engine\core\DomainListener.class
@@ -154,4 +156,5 @@ minicp\examples\BinPacking.class
 minicp\util\GraphUtil.class
 minicp\engine\constraints\AllDifferentDC$1.class
 minicp\examples\EBRP$EBRPSolution.class
+minicp\examples\Tp2Test.class
 tinycsp\examples\NQueensTinyCSP.class
