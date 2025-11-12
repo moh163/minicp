@@ -6,13 +6,13 @@ import minicp.util.Procedure;
 import java.util.function.Supplier;
 
 import minicp.cp.BranchingScheme;
-import minicp.engine.constraints.tp2;
+import minicp.engine.constraints.Tp2;
 import static minicp.cp.SplitDomRange.splitDomRange;
 
 import static minicp.cp.BranchingScheme.branch;
 
 public class SplitDomRange {
-    public static Supplier<Procedure[]> splitDomRange(IntVar[] vars) {
+    public static Supplier<Procedure[]> splitDomRange(IntVar... vars) {
         return () -> {
             IntVar x = null;
             int maxRange = -1;

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Tp2.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">minicp:minicp</a> &gt; <a href="index.source.html" class="el_package">minicp.engine.constraints</a> &gt; <span class="el_source">Tp2.java</span></div><h1>Tp2.java</h1><pre class="source lang-java linenums">package minicp.engine.constraints;
+
+import minicp.engine.core.AbstractConstraint;
+import minicp.engine.core.IntVar;
+
+public class Tp2 extends AbstractConstraint {
+
+    private final IntVar[] y;
+    private final IntVar x, z;
+
+    /**
+     * Creates a constraint such
+     * that z ≥ 0
+     * si x = 0 alors moyenne(y[0], ..., y[n − 1]) ≤ 2 ∗ z sinon moyenne(y[0], ...,
+     * y[n − 1]) ≤ z
+     * 
+     * @param x verify if equals to 0
+     * @param y the variable
+     * @param z bounding the mean
+     */
+
+    public Tp2(IntVar x, IntVar[] y, IntVar z) {
+<span class="nc" id="L23">        super(y[0].getSolver());</span>
+<span class="nc" id="L24">        this.y = y;</span>
+<span class="nc" id="L25">        this.x = x;</span>
+<span class="nc" id="L26">        this.z = z;</span>
+<span class="nc" id="L27">    }</span>
+
+    @Override
+    public void post() {
+<span class="nc" id="L31">        z.removeBelow(0);</span>
+<span class="nc" id="L32">        x.propagateOnNotZero(this);</span>
+<span class="nc" id="L33">        x.propagateOnFix(this);</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">        for (IntVar yi : y)</span>
+<span class="nc" id="L35">            yi.propagateOnBoundChange(this);</span>
+<span class="nc" id="L36">        z.propagateOnMaxChange(this);</span>
+<span class="nc" id="L37">        propagate();</span>
+<span class="nc" id="L38">    }</span>
+
+    @Override
+    public void propagate() {
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        if (!x.isFixed())</span>
+<span class="nc" id="L43">            return;</span>
+<span class="nc" id="L44">        double meanMin = 0;</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">        for (IntVar yi : y) {</span>
+<span class="nc" id="L46">            meanMin += yi.min();</span>
+        }
+<span class="nc" id="L48">        meanMin /= y.length;</span>
+
+        //resserer les bornes inferieur de z
+<span class="nc bnc" id="L51" title="All 2 branches missed.">        if (x.min() == 0) {</span>
+<span class="nc" id="L52">            z.removeBelow((int) Math.ceil(meanMin / 2.0));</span>
+        } else {
+<span class="nc" id="L54">            z.removeBelow((int) Math.ceil(meanMin));</span>
+        }
+
+        //resserer borne superieur de y
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        for (int i = 0; i &lt; y.length; i++) {</span>
+            // somme min des autres y
+<span class="nc" id="L60">            int sumMinOther = 0;</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">            for (int j = 0; j &lt; y.length; j++) {</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">                if (j != i) {</span>
+<span class="nc" id="L63">                    sumMinOther += y[j].min();</span>
+                }
+            }
+            int yiMax;
+<span class="nc bnc" id="L67" title="All 2 branches missed.">            if (x.min() == 0) {</span>
+<span class="nc" id="L68">                yiMax = (int) Math.floor(y.length * 2 * z.max() - sumMinOther);</span>
+            } else {
+<span class="nc" id="L70">                yiMax = (int) Math.floor(y.length * z.max() - sumMinOther);</span>
+            }
+<span class="nc" id="L72">            y[i].removeAbove(yiMax);</span>
+        }
+<span class="nc" id="L74">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

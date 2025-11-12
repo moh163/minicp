@@ -30,6 +30,7 @@ minicp\examples\StableMatching.class
 minicp\engine\constraints\Disjunctive.class
 minicp\engine\constraints\Element1DVar.class
 minicp\engine\constraints\ThetaTree.class
+minicp\engine\constraints\Tp2.class
 minicp\examples\QAPPaper.class
 minicp\examples\QAP$Pair.class
 minicp\examples\QAPLNS.class
@@ -130,7 +131,6 @@ minicp\state\TrailInt.class
 minicp\search\StopSearchException.class
 minicp\engine\constraints\Absolute.class
 minicp\engine\constraints\Profile$1.class
-minicp\engine\constraints\tp2.class
 minicp\search\DFSListener.class
 minicp\engine\constraints\Profile$Rectangle.class
 minicp\engine\core\DomainListener.class

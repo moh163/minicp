@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
-import minicp.engine.constraints.tp2;
+import minicp.engine.constraints.Tp2;
 import static minicp.cp.SplitDomRange.splitDomRange;
 
 import static minicp.cp.BranchingScheme.*;
@@ -35,7 +35,7 @@ public class Tp2Test {
         for(int i = 0; i < 2; i++)
             y[i] = makeIntVar(cp, domaineMin, domaineMax);
 
-        cp.post(tp2.makeTp2(x, y, z));
+        cp.post(new Tp2(x, y, z));
 
         DFSearch dfs = makeDfs(cp, splitDomRange(x));
 
