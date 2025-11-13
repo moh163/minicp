@@ -32,7 +32,7 @@ public class Tp2 extends AbstractConstraint {
         x.propagateOnNotZero(this);
         x.propagateOnFix(this);
         for (IntVar yi : y)
-            yi.propagateOnBoundChange(this);
+            yi.propagateOnMinChange(this);
         z.propagateOnMaxChange(this);
         propagate();
     }
