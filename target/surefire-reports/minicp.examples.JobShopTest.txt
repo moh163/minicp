@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: minicp.examples.JobShopTest
 -------------------------------------------------------------------------------
-Tests run: 26, Failures: 0, Errors: 0, Skipped: 26, Time elapsed: 1.261 s - in minicp.examples.JobShopTest
+Tests run: 26, Failures: 0, Errors: 0, Skipped: 26, Time elapsed: 1.321 s - in minicp.examples.JobShopTest

@@ -140,6 +140,46 @@ public final class BranchingScheme {
     }
 
     /**
+     * Splitting the domain of the variable with the
+     * largest range (max - min).
+     * It creates two branches. The left branch
+     * restricting the variable to its lower half domain.
+     * The right branch restricting the variable to its upper half domain.
+     * 
+     * @param vars the variables among which the one with the largest range is selected
+     * @return a branching scheme that splits the domain of the variable with the largest range
+     */
+    public static Supplier<Procedure[]> splitDomRange(IntVar... vars) {
+        return () -> {
+            IntVar x = null;
+            int maxRange = -1;
+
+            for (IntVar v : vars) {
+                if (!v.isFixed()) {
+                    int range = v.max() - v.min();
+                    if (range > maxRange) {
+                        maxRange = range;
+                        x = v;
+                    }
+                }
+            }
+
+            if (x == null)
+                return BranchingScheme.EMPTY; 
+
+            final IntVar chosen = x;
+            final int mid = (x.min() + x.max()) / 2;
+
+            return branch(
+                    () -> chosen.removeAbove(mid),
+                    () -> chosen.removeBelow(mid + 1)
+            );
+        };
+    }
+
+
+
+    /**
      * Sequential Search combinator that linearly
      * considers a list of branching generator.
      * One branching of this list is executed

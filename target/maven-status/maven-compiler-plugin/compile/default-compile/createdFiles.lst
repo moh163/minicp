@@ -67,7 +67,6 @@ minicp\util\Procedure.class
 minicp\search\DFSearch$2.class
 minicp\state\Trail.class
 minicp\engine\constraints\AllDifferentFWC.class
-minicp\cp\SplitDomRange.class
 tinycsp\TinyCSP.class
 minicp\examples\DialARide$RideStop.class
 tinycsp\NotEqual.class

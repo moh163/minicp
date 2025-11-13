@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="CA"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-17\bin"/>
-    <property name="sun.java.command" value="C:\Users\moham\AppData\Local\Temp\surefire9070277604975493024\surefirebooter-20251111192657603_3.jar C:\Users\moham\AppData\Local\Temp\surefire9070277604975493024 2025-11-11T19-26-56_869-jvmRun1 surefire-20251111192657603_1tmp surefire_0-20251111192657603_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\moham\AppData\Local\Temp\surefire7604615609449400360\surefirebooter-20251113140523883_3.jar C:\Users\moham\AppData\Local\Temp\surefire7604615609449400360 2025-11-13T14-05-23_274-jvmRun1 surefire-20251113140523883_1tmp surefire_0-20251113140523883_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\moham\Desktop\PolyMtl\2025 Automne\TP2\minicp\target\test-classes;C:\Users\moham\Desktop\PolyMtl\2025 Automne\TP2\minicp\target\classes;C:\Users\moham\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.1\junit-jupiter-engine-5.9.1.jar;C:\Users\moham\.m2\repository\org\junit\platform\junit-platform-engine\1.9.1\junit-platform-engine-1.9.1.jar;C:\Users\moham\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\moham\.m2\repository\org\junit\platform\junit-platform-commons\1.9.1\junit-platform-commons-1.9.1.jar;C:\Users\moham\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.1\junit-jupiter-api-5.9.1.jar;C:\Users\moham\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\moham\.m2\repository\io\github\ucl-ingi\JavaGrader\1.0.6\JavaGrader-1.0.6.jar;C:\Users\moham\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.1\junit-jupiter-params-5.9.1.jar;C:\Users\moham\.m2\repository\org\junit\platform\junit-platform-suite\1.9.1\junit-platform-suite-1.9.1.jar;C:\Users\moham\.m2\repository\org\junit\platform\junit-platform-suite-api\1.9.1\junit-platform-suite-api-1.9.1.jar;C:\Users\moham\.m2\repository\org\junit\platform\junit-platform-suite-engine\1.9.1\junit-platform-suite-engine-1.9.1.jar;C:\Users\moham\.m2\repository\org\junit\platform\junit-platform-suite-commons\1.9.1\junit-platform-suite-commons-1.9.1.jar;C:\Users\moham\.m2\repository\org\junit\platform\junit-platform-launcher\1.9.1\junit-platform-launcher-1.9.1.jar;C:\Users\moham\.m2\repository\com\google\code\gson\gson\2.10\gson-2.10.jar;C:\Users\moham\.m2\repository\commons-cli\commons-cli\1.5.0\commons-cli-1.5.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\moham\AppData\Local\Temp\surefire9070277604975493024\surefirebooter-20251111192657603_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\moham\AppData\Local\Temp\surefire7604615609449400360\surefirebooter-20251113140523883_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.12+8-LTS-286"/>
@@ -57,6 +57,6 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="testBoolVar(Solver)[1]" classname="minicp.engine.core.BoolVarTest" time="0.003"/>
+  <testcase name="testBoolVar(Solver)[1]" classname="minicp.engine.core.BoolVarTest" time="0"/>
   <testcase name="testBoolVar(Solver)[2]" classname="minicp.engine.core.BoolVarTest" time="0"/>
 </testsuite>

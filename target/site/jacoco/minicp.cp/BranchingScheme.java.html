@@ -139,6 +139,36 @@ public final class BranchingScheme {
         };
     }
 
+    public static Supplier&lt;Procedure[]&gt; splitDomRange(IntVar... vars) {
+<span class="nc" id="L143">        return () -&gt; {</span>
+<span class="nc" id="L144">            IntVar x = null;</span>
+<span class="nc" id="L145">            int maxRange = -1;</span>
+
+<span class="nc bnc" id="L147" title="All 2 branches missed.">            for (IntVar v : vars) {</span>
+<span class="nc bnc" id="L148" title="All 2 branches missed.">                if (!v.isFixed()) {</span>
+<span class="nc" id="L149">                    int range = v.max() - v.min();</span>
+<span class="nc bnc" id="L150" title="All 2 branches missed.">                    if (range &gt; maxRange) {</span>
+<span class="nc" id="L151">                        maxRange = range;</span>
+<span class="nc" id="L152">                        x = v;</span>
+                    }
+                }
+            }
+
+<span class="nc bnc" id="L157" title="All 2 branches missed.">            if (x == null)</span>
+<span class="nc" id="L158">                return BranchingScheme.EMPTY; </span>
+
+<span class="nc" id="L160">            final IntVar chosen = x;</span>
+<span class="nc" id="L161">            final int mid = (x.min() + x.max()) / 2;</span>
+
+<span class="nc" id="L163">            return branch(</span>
+<span class="nc" id="L164">                    () -&gt; chosen.removeAbove(mid),</span>
+<span class="nc" id="L165">                    () -&gt; chosen.removeBelow(mid + 1)</span>
+            );
+        };
+    }
+
+
+
     /**
      * Sequential Search combinator that linearly
      * considers a list of branching generator.
@@ -150,7 +180,7 @@ public final class BranchingScheme {
      * @see Sequencer
      */
     public static Supplier&lt;Procedure[]&gt; and(Supplier&lt;Procedure[]&gt;... choices) {
-<span class="fc" id="L153">        return new Sequencer(choices);</span>
+<span class="fc" id="L183">        return new Sequencer(choices);</span>
     }
 
     /**
@@ -163,7 +193,7 @@ public final class BranchingScheme {
      * @see LimitedDiscrepancyBranching
      */
     public static Supplier&lt;Procedure[]&gt; limitedDiscrepancy(Supplier&lt;Procedure[]&gt; branching, int maxDiscrepancy) {
-<span class="nc" id="L166">        return new LimitedDiscrepancyBranching(branching, maxDiscrepancy);</span>
+<span class="nc" id="L196">        return new LimitedDiscrepancyBranching(branching, maxDiscrepancy);</span>
     }
 
     /**
@@ -179,7 +209,7 @@ public final class BranchingScheme {
      *                      it must be assigned on the left branch (and excluded on the right)
      */
     public static Supplier&lt;Procedure[]&gt; lastConflict(Supplier&lt;IntVar&gt; variableSelector, Function&lt;IntVar, Integer&gt; valueSelector) {
-<span class="fc" id="L182">         throw new NotImplementedException(&quot;lastConflict&quot;);</span>
+<span class="fc" id="L212">         throw new NotImplementedException(&quot;lastConflict&quot;);</span>
     }
 
     /**
@@ -195,7 +225,7 @@ public final class BranchingScheme {
      *                      it must be assigned on the left branch (and excluded on the right)
      */
     public static Supplier&lt;Procedure[]&gt; conflictOrderingSearch(Supplier&lt;IntVar&gt; variableSelector, Function&lt;IntVar, Integer&gt; valueSelector) {
-<span class="fc" id="L198">         throw new NotImplementedException(&quot;conflictOrderingSearch&quot;);</span>
+<span class="fc" id="L228">         throw new NotImplementedException(&quot;conflictOrderingSearch&quot;);</span>
     }
 
 }
